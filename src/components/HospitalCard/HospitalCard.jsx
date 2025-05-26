@@ -1,6 +1,6 @@
-import icon from "../../assets/hospitalicon.png";
+import icon from "../../assets/hospitalicon.jpg";
 import { Box, Button, Chip, Divider, Stack, Typography } from "@mui/material";
-import thumb from "../../assets/thumbsup.png";
+import thumb from "../../assets/thumbsup.jpg";
 import Calendar from "../Calendar/Calendar";
 import { useState } from "react";
 import { format } from "date-fns";
@@ -88,7 +88,7 @@ export default function HospitalCard({
               color="#fff"
               sx={{ opacity: 0.5 }}
             >
-              {details["Hospital overall rating"] == "Not Available"
+              {details["Hospital overall rating"] === "Not Available"
                 ? 0
                 : details["Hospital overall rating"]}
             </Typography>
@@ -124,25 +124,30 @@ export default function HospitalCard({
 
           {booking && (
             <Stack direction="row" spacing={1} mt={{ xs: 2, md: 0 }}>
-              <Chip
-                label={details.bookingTime}
-                variant="outlined"
-                color="primary"
-                sx={{
-                  borderRadius: 1,
-                  fontSize: 14,
-                }}
-              />
-              <Chip
-                label={format(new Date(details.bookingDate), "dd MMMM yyyy")}
-                variant="outlined"
-                color="success"
-                sx={{
-                  borderRadius: 1,
-                  fontSize: 14,
-                }}
-              />
-            </Stack>
+  <Chip
+    label={details.bookingTime || "N/A"}
+    variant="outlined"
+    color="primary"
+    sx={{
+      borderRadius: 1,
+      fontSize: 14,
+    }}
+  />
+  <Chip
+    label={
+      details.bookingDate && !isNaN(new Date(details.bookingDate))
+        ? format(new Date(details.bookingDate), "dd MMMM yyyy")
+        : "Invalid Date"
+    }
+    variant="outlined"
+    color="success"
+    sx={{
+      borderRadius: 1,
+      fontSize: 14,
+    }}
+  />
+</Stack>
+
           )}
         </Stack>
       </Stack>
