@@ -42,7 +42,7 @@ export default function SearchHospital() {
       }
     };
 
-    if (formData.state != "") {
+    if (formData.state !== "") {
       fetchCities();
     }
   }, [formData.state]);
@@ -119,6 +119,7 @@ export default function SearchHospital() {
       </Select>
 
       <Button
+        id="#searchBtn"
         type="submit"
         variant="contained"
         size="large"
